@@ -1,20 +1,20 @@
-public class StringCaseChanger implements StringTransformer {
+public class StringCaseChanger implements StringTransformer{
     @Override
     public void execute(StringDrink drink) {
-
-        String text = drink.getText();
-
-        StringBuilder newText = new StringBuilder();
-
-        for (char c : text.toCharArray()) {
-            if (Character.isLowerCase(c)) {
-                newText.append(Character.toUpperCase(c));
-            } else if (Character.isUpperCase(c)) {
-                newText.append(Character.toLowerCase(c));
-            } else {
-                newText.append(c);
+        StringBuilder str  = new StringBuilder("");
+        String Text  = drink.getText();
+        for (int i=0; i<Text.length(); i++) {
+            char c = Text.charAt(i);
+            if (Character.isLowerCase(c)){
+                str.append(Character.toUpperCase(c));
+            }else{
+                str.append(Character.toLowerCase(c));
             }
         }
-        drink.setText(newText.toString());
+        drink.setText(str.toString());
+    }
+    @Override
+    public void undo(StringDrink drink) {
+        execute(drink);
     }
 }

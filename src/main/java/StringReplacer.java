@@ -1,18 +1,16 @@
-public class StringReplacer implements StringTransformer {
-    private char targetChar;
-    private char replacementChar;
-
-    public StringReplacer(char targetChar, char replacementChar) {
-        this.targetChar = targetChar;
-        this.replacementChar = replacementChar;
+public class StringReplacer implements StringTransformer{
+    private char oldchar;
+    private char newchar;
+    public StringReplacer(char oldchar, char newchar) {
+        this.oldchar = oldchar;
+        this.newchar = newchar;
     }
-
     @Override
     public void execute(StringDrink drink) {
-        String text = drink.getText();
-
-        String replacedText = text.replace(targetChar, replacementChar);
-
-        drink.setText(replacedText);
+        drink.setText(drink.getText().replace(this.oldchar, this.newchar));
+    }
+    @Override
+    public void undo(StringDrink drink) {
+        drink.setText(drink.getText().replace(this.newchar, this.oldchar));
     }
 }
